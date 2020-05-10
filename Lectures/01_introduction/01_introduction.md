@@ -1,6 +1,6 @@
 # Lecture 1 - Introduction
 
-### Summary
+## Summary
 
 My notes here will be brief. This was a high-level survey of security concerns, systems design,
 policy considerations, and examples of when things go wrong. Real world policy failures and design
@@ -12,7 +12,7 @@ Attackers are creative; security is difficult. A focus on __increased cost__ of 
 prudent approach to security. Making things costly or unrealsitic is often easier and results in
 better security payoffs versus engineering or assuming perfect reliability of some security scheme.
 
-### Buffer Overflow Demonstration
+## Buffer Overflow Demonstration
 
 The class ends with a demonstration of a basic buffer overflow in C-code. The instructor uses `gdb`
 debugger to step through the process and show the buffer being overrun:
