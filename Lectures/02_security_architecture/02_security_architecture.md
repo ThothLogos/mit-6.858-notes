@@ -32,7 +32,7 @@ Google Front-End:
 
  - Accepts/handles all HTTP/S requests
  - Translates them into a google RPC protocol
-  - This is a universal protocol all components of the infrastructure speak
+   - This is a universal protocol all components of the infrastructure speak
  - Once all of the doWork() subrequests are finished, GFE handles packaging it as the HTTP/S return
 
 ![alt text](./imgs/0201_googinfra.png "Google Cloud Infrastructure Example")
@@ -58,16 +58,16 @@ or deny access to the `resource`, and also keep record of all actions to the `Au
 __Duties of the `Guard` box:__
 
  - Authentication - which user? service? machine?
-  - Password
-  - 2FA
-  - IP Whitelisting (difficult to scale, error prone)
-  - Public/Private key pairs
-  - All of these require persistent data of some kind service-side, ie a table of users/ids/credentials/etc
+   - Password
+   - 2FA
+   - IP Whitelisting (difficult to scale, error prone)
+   - Public/Private key pairs
+   - All of these require persistent data of some kind service-side, ie a table of users/ids/credentials/etc
  - Authorization - apply the policy against the auth'd party
-  - `permission = Policy(principal, resource)`
-  - Access Control Lists (ACLs)
+   - `permission = Policy(principal, resource)`
+   - Access Control Lists (ACLs)
  - Audit - log activity
-  - Timestamp, pricipal, resource, result
+   - Timestamp, pricipal, resource, result
 
  The "Gold [Au] Standard" harr harr.
 
@@ -99,6 +99,6 @@ insert malware into their platform firmwares.
 ### Availability
 
  - Denial-of-Service mitigation
-  - Lots of resources, dynamic scaling to respond to attacks and mitigate impact
-  - Increase strictness for authenticated requests (filter by `principal`)
-  - Minimize resource impact/usage *before* enforcing strict authenication
+   - Lots of resources, dynamic scaling to respond to attacks and mitigate impact
+   - Increase strictness for authenticated requests (filter by `principal`)
+   - Minimize resource impact/usage *before* enforcing strict authenication
