@@ -7,29 +7,29 @@
 
 ## Lecture
 
-User Authentication:
+__User Authentication:__
 
  - The foundation of many security policies
  - Interesting technical issues
  - Security vs Convenience
 
-Standard Process:
+__Standard Process:__
 
  - Registration
  - Auth Check
  - Recovery
 
-Challenges:
+__Challenges:__
 
  - Intermediate principals (devices, load balancer, keylogger)
  - User Identity
    - Registration is generally a very weak form of identity
  - Human factor (weak passwords, re-used credentials)
 
-Pro-active Password Implementation:
+__Pro-active Password Implementation:__
 
- - Use password only once per session - minimize exposure & swap to stronger secret (session key).
- - Use and encourage password manager - avoid weak & re-used passwords.
+ - Use password only once per session - minimize exposure & swap to stronger secret (session key)
+ - Use and encourage password manager - avoid weak & re-used passwords
  - Rate limit password attempts to mitigate brute force
  - Augment passwords with 2FA
 
@@ -50,12 +50,27 @@ sendCredentials(username, password, server) {
 }
 ```
 
-This method, unfortunately, is vulnerable to Rainbow Table attacks. This is a pre-built database of
+This method, unfortunately, is vulnerable to __Rainbow Table__ attacks. This is a pre-built database of
 common/known passwords and their hashes. When brute-forcing, the attacker simply sends the hashes
 and if one works for a login, they can derive the original password. A solution to this is to add
-"salt" to the password before hashing.
+__salt__ to the password before hashing.
 
 Salt is just some random data appended to the input of the hash function, forcing the hash output to
 be unique between services where the user may have used the same password. The same password, hashed
 using different salt, will result in a different stored hash. Using this method we can thwart
 Rainbow Table attacks.
+
+### Two-Factor Authentication (2FA)
+
+Used in conjunction with passwords to strengeth the user-auth process. 2FA helps defend against weak
+passwords and phishing attacks. It requires the attacker to compromise two unique systems to get
+access to a single service. Additional factors can be added to a __Multi-Factored Authentication__ (MFA)
+approach.
+
+__Approaches:__
+
+ - Additional login "code" step
+   - SMS (weak to SIM attacks)
+   - Authy (potentially weak through backup option)
+   - Google Auth (no backups or transfer available)
+ -  
