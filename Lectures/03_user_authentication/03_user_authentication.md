@@ -69,8 +69,44 @@ approach.
 
 __Approaches:__
 
- - Additional login "code" step
+ - Additional "code", usually: Time-based One-Time Password (TOTP)
    - SMS (weak to SIM attacks)
    - Authy (potentially weak through backup option)
    - Google Auth (no backups or transfer available)
- -  
+   - Duo
+ - Biological key
+   - Fingerprint
+   - Retina
+   - Facial Recognition
+ - Hardware key (private key storage device)
+   - YubiKey / U2F
+
+"Something you know", "Something you are", "Something you have".
+
+### U2F Protocol
+
+ - The browser `B` issues a login request to server `S`
+ - Server `S` responds with challenge `C`
+ - Browser `B` forwards challenge `C` directly to the device `D`
+ - Device `D` signs using its private key: `Sign(priv_key, C) -> SignedMsg`
+ - `SignedMsg` is forwarded back through browser to the server
+ - Server `S` runs `Verify(pub_key, C, SignedMsg)`
+ - If true, high confidence we know which device signed the message, and the 2FA is approved
+
+ ![alt text](./imgs/0302_2faprotocol.png "U2F Example Diagram")
+
+### Man-in-the-Middle Attack
+
+An impersonator gets in the middle of the communication chain and acts as a relay to lift sensitive
+information. The imposter, s-prime `S'` gets in the middle:
+
+![alt text](./imgs/0303_mitm.png "Man-in-the-Middle Attack")
+
+One solution to this is to include the `origin` as part of the `challenge` sent to the 2FA. This
+creates a situation where the attacker's imposter site cannot avoid sending evidence of its presence
+to the validating service. The service `S` will notice that the `origin` is showing from `S'`, the
+imposter, and they will deny the 2FA request.
+
+![alt text](./imgs/0304_mitm_origin.png "Man-in-the-Middle Mitigation")
+
+An additional improvement can be made by including the `TLS channel id` in the signing process.
