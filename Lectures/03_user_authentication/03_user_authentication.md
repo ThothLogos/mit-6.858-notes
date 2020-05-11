@@ -93,7 +93,7 @@ __Approaches:__
  - Server `S` runs `Verify(pub_key, C, SignedMsg)`
  - If true, high confidence we know which device signed the message, and the 2FA is approved
 
- ![alt text](./imgs/0302_2faprotocol.png "U2F Example Diagram")
+ ![alt text](./imgs/0302_2faprocess.png "U2F Example Diagram")
 
 ### Man-in-the-Middle Attack
 
