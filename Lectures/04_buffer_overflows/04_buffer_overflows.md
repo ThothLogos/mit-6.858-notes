@@ -97,21 +97,21 @@ foo() {
 
 Freelist representation (doubly-linked list):
 
-```s
+```
       |_________|
       | 32 bytes|
       |_________|
-      | p1 | n1 |
+      | p  | n  |
       |____|____|
       | 16 bytes| <-- 2nd call to malloc() perhaps
       |_________|            here for buffer "b"
-      | p2 | n2 |
+      | p  | n  |
       |____|____|
       | 48 bytes| <-- allocated with malloc() as "str"
       |_________|
       | 16 bytes|
       |_________|
-      | p1 | n1 |
+      | p  | n  |
       |____|____|
       |         |
 ```
@@ -120,3 +120,17 @@ Should an attacker send more than 48 bytes into `gets(str)` it will overwrite th
 on the freelist; in this case it will write upwards, replacing `p2` and `n2`. If, after
 this, another call to `malloc()` can occur for `16 bytes` the attacker can use this to
 their advantage. This 2nd space allocated will be referred to as buffer `b`.
+
+Pointer manipulation:
+
+```
+b->n->p = b->p
+b->p->n = b->n
+```
+
+The attacker can place his exploit into the original buffer, overrun into the next buffer
+pointer space, re-write those to reference the attack, then relies on a 2nd call to `malloc()`
+to execute.
+
+### Retrofit Bounds Checks
+
